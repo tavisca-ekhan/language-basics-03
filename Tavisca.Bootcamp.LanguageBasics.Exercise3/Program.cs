@@ -43,33 +43,33 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
     public static int[] SelectMeals(int[] protein, int[] carbs, int[] fat, string[] dietPlans)
     {
       var result = new int[dietPlans.Length];
-      var cal = new int[protein.Length];
+      var calorie = new int[protein.Length];
       var items = new int[protein.Length];
 
-      for (int i = 0; i < cal.Length; i++)
+      for (var calorieIndex = 0; calorieIndex < calorie.Length; calorieIndex++)
       {
-        cal[i] = (protein[i] + carbs[i]) * 5 + fat[i] * 9;
-        items[i] = i;
+        calorie[calorieIndex] = (protein[calorieIndex] + carbs[calorieIndex]) * 5 + fat[calorieIndex] * 9;
+        items[calorieIndex] = calorieIndex;
       }
 
-      for (var i = 0; i < result.Length; i++)
+      for (var resultIndex = 0; resultIndex < result.Length; resultIndex++)
       {
-        if (dietPlans[i] == "")
-          result[i] = 0;
+        if (dietPlans[resultIndex] == "")
+          result[resultIndex] = 0;
         else
         {
-          var diet = dietPlans[i].ToCharArray();
-          var item = getItemNumber(diet[0], protein, carbs, fat, cal, items).ToArray();
+          var diet = dietPlans[resultIndex].ToCharArray();
+          var item = GetItemNumber(diet[0], protein, carbs, fat, calorie, items).ToArray();
           if (diet.Length == 1)
-            result[i] = item[0];
+            result[resultIndex] = item[0];
           else
           {
-            for (var j = 0; j < diet.Length; j++)
+            for (var dietIndex = 0; dietIndex < diet.Length; dietIndex++)
             {
-              item = getItemNumber(diet[j], protein, carbs, fat, cal, item).ToArray();
-              if (item.Length == 1 || j + 1 == diet.Length)
+              item = GetItemNumber(diet[dietIndex], protein, carbs, fat, calorie, item).ToArray();
+              if (item.Length == 1 || dietIndex + 1 == diet.Length)
               {
-                result[i] = item[0];
+                result[resultIndex] = item[0];
                 break;
               }
             }
@@ -79,74 +79,74 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
       return result;
     }
 
-    public static List<int> getItemNumber(char dietChar, int[] protein, int[] carbs, int[] fat, int[] cal, int[] items)
+    public static List<int> GetItemNumber(char dietChar, int[] protein, int[] carbs, int[] fat, int[] calorie, int[] items)
     {
-      var item = new List<int>();
+      var itemList = new List<int>();
       var itemNumber = new List<int>();
       switch (dietChar)
       {
         case 'P':
-          for (var i = 0; i < items.Length; i++)
-            item.Add(protein[items[i]]);
-          for (var i = 0; i < protein.Length; i++)
-            if (protein[i] == item.Max())
-              itemNumber.Add(i);
+          for (var index = 0; index < items.Length; index++)
+            itemList.Add(protein[items[index]]);
+          for (var index = 0; index < protein.Length; index++)
+            if (protein[index] == itemList.Max())
+              itemNumber.Add(index);
           return itemNumber;
 
         case 'p':
-          for (var i = 0; i < items.Length; i++)
-            item.Add(protein[items[i]]);
-          for (var i = 0; i < protein.Length; i++)
-            if (protein[i] == item.Min())
-              itemNumber.Add(i);
+          for (var index = 0; index < items.Length; index++)
+            itemList.Add(protein[items[index]]);
+          for (var index = 0; index < protein.Length; index++)
+            if (protein[index] == itemList.Min())
+              itemNumber.Add(index);
           return itemNumber;
 
         case 'C':
-          for (var i = 0; i < items.Length; i++)
-            item.Add(carbs[items[i]]);
-          for (var i = 0; i < carbs.Length; i++)
-            if (carbs[i] == item.Max())
-              itemNumber.Add(i);
+          for (var index = 0; index < items.Length; index++)
+            itemList.Add(carbs[items[index]]);
+          for (var index = 0; index < carbs.Length; index++)
+            if (carbs[index] == itemList.Max())
+              itemNumber.Add(index);
           return itemNumber;
 
         case 'c':
-          for (var i = 0; i < items.Length; i++)
-            item.Add(carbs[items[i]]);
-          for (var i = 0; i < carbs.Length; i++)
-            if (carbs[i] == item.Min())
-              itemNumber.Add(i);
+          for (var index = 0; index < items.Length; index++)
+            itemList.Add(carbs[items[index]]);
+          for (var index = 0; index < carbs.Length; index++)
+            if (carbs[index] == itemList.Min())
+              itemNumber.Add(index);
           return itemNumber;
 
         case 'F':
-          for (var i = 0; i < items.Length; i++)
-            item.Add(fat[items[i]]);
-          for (var i = 0; i < fat.Length; i++)
-            if (fat[i] == item.Max())
-              itemNumber.Add(i);
+          for (var index = 0; index < items.Length; index++)
+            itemList.Add(fat[items[index]]);
+          for (var index = 0; index < fat.Length; index++)
+            if (fat[index] == itemList.Max())
+              itemNumber.Add(index);
           return itemNumber;
 
         case 'f':
-          for (var i = 0; i < items.Length; i++)
-            item.Add(fat[items[i]]);
-          for (var i = 0; i < fat.Length; i++)
-            if (fat[i] == item.Min())
-              itemNumber.Add(i);
+          for (var index = 0; index < items.Length; index++)
+            itemList.Add(fat[items[index]]);
+          for (var index = 0; index < fat.Length; index++)
+            if (fat[index] == itemList.Min())
+              itemNumber.Add(index);
           return itemNumber;
 
         case 'T':
-          for (var i = 0; i < items.Length; i++)
-            item.Add(cal[items[i]]);
-          for (var i = 0; i < cal.Length; i++)
-            if (cal[i] == item.Max())
-              itemNumber.Add(i);
+          for (var index = 0; index < items.Length; index++)
+            itemList.Add(calorie[items[index]]);
+          for (var index = 0; index < calorie.Length; index++)
+            if (calorie[index] == itemList.Max())
+              itemNumber.Add(index);
           return itemNumber;
 
         case 't':
-          for (var i = 0; i < items.Length; i++)
-            item.Add(cal[items[i]]);
-          for (var i = 0; i < cal.Length; i++)
-            if (cal[i] == item.Min())
-              itemNumber.Add(i);
+          for (var index = 0; index < items.Length; index++)
+            itemList.Add(calorie[items[index]]);
+          for (var index = 0; index < calorie.Length; index++)
+            if (calorie[index] == itemList.Min())
+              itemNumber.Add(index);
           return itemNumber;
 
         default:
